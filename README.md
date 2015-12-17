@@ -11,44 +11,63 @@ gem install pritunl_api_client
 ## Usage
 
 ```ruby
+require 'pritunl_api_client'
+
 @pritunl = PritunlApiClient::Client.new(
-  ip:       '127.0.0.1',
-  port:     9700,
-  username: 'pritunl',
-  password: 'pritunl',
-  secure:   false
+  base_url:   'https://localhost:9700',
+  api_token:  'p7g444S3IZ5wmFvmzWmx14qACXdzQ25b',
+  api_secret: 'OpS9fjxkPI3DclkdKDDr6mqYVd0DJh4i',
+  verify_ssl: false
 )
 ```
 
+### Returns a list of organizations on the server sorted by name.
+
 ```ruby
 @pritunl.organization.all
-```
 
-```json
 [
   {
-    user_count: 57,
-    id: "5669e400c3439f0ec568877d",
-    name: "org1"
+    "user_count" => 512,
+    "id" => "55e99499b0e7300fef77e2b1",
+    "name" => "org1"
   },
   {
-    user_count: 21,
-    id: "566804d92979db13996d0753",
-    name: "org2"
+    "user_count" => 1024,
+    "id" => "55e9f1d4b0e730245677dc2d",
+    "name" => "org2"
   }
 ]
 ```
 
+### Returns an organization.
+
 ```ruby
-@pritunl.organization.find( "5669e400c3439f0ec568877d" )
+@pritunl.organization.find( "55e99499b0e7300fef77e2b1" )
+
+{
+  "user_count" => 512,
+  "id" => "55e99499b0e7300fef77e2b1",
+  "name" => "org1"
+}
 ```
 
-```json
-{
-  user_count: 57,
-  id: "5669e400c3439f0ec568877d",
-  name: "org1"
-}
+### Create a new organization.
+
+```ruby
+@pritunl.organization.create( name: 'new_org' )
+```
+
+### Rename an existing organization.
+
+```ruby
+@pritunl.organization.update( 'fb48734e859242e2800f077216401736', name: 'new_name' )
+```
+
+### Delete an existing organization.
+
+```ruby
+@pritunl.organization.delete( '55e9f27bb0e730245677dc36' )
 ```
 
 ## Contributing

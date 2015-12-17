@@ -6,11 +6,23 @@ module PritunlApiClient
     end
 
     def all
-      @api.get( '/organization' )
+      @api.get( "/organization" )
     end
 
-    def find( organization_id )
-      @api.get( "/organization/#{organization_id}" )
+    def find( id )
+      @api.get( "/organization/#{id}" )
+    end
+
+    def create( name: )
+      @api.post( "/organization", name: name )
+    end
+
+    def update( id, name: )
+      @api.put( "/organization/#{id}", name: name )
+    end
+
+    def delete( id )
+      @api.delete( "/organization/#{id}" )
     end
 
   end

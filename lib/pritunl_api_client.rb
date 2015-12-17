@@ -1,3 +1,4 @@
+require_relative 'pritunl_api_client/api'
 require_relative 'pritunl_api_client/settings'
 require_relative 'pritunl_api_client/organization'
 require_relative 'pritunl_api_client/user'
@@ -6,22 +7,17 @@ require_relative 'pritunl_api_client/server'
 
 module PritunlApiClient
   class Client
-    attr_reader :ip
-    attr_reader :port
-    attr_reader :username
-    attr_reader :password
-    attr_reader :secure
 
-    def initialize( ip:, port: 9700, username:, password:, secure: false )
-      @ip       = ip
-      @port     = port
-      @username = username
-      @password = password
-      @secure   = secure
-      @api = Api.new( ip: ip, port: port, username: username, password: password, secure: secure )
+    def initialize( base_url:, api_token:, api_secret:, verify_ssl: true )
+      @base_url   = base_url
+      @api_token  = api_token
+      @api_secret = api_secret
+      @verify_ssl = verify_ssl
+      @api = Api.new( base_url: base_url, api_token: api_token, api_secret: api_secret, verify_ssl: verify_ssl )
     end
 
     def auth
+      Auth.new( @api )
     end
 
     def event
