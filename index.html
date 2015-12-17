@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Pritunl API Client by eterry1388</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Pritunl API Client</h1>
+      <h2 class="project-tagline">API client for Pritunl written in Ruby</h2>
+      <a href="https://github.com/eterry1388/pritunl_api_client" class="btn">View on GitHub</a>
+      <a href="https://github.com/eterry1388/pritunl_api_client/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/eterry1388/pritunl_api_client/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="pritunl-api-client" class="anchor" href="#pritunl-api-client" aria-hidden="true"><span class="octicon octicon-link"></span></a>Pritunl API Client</h1>
+
+<p>API client for Pritunl written in Ruby.  See Pritunl API documentation here:  <a href="https://pritunl.com/api.html">https://pritunl.com/api.html</a></p>
+
+<h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<div class="highlight highlight-source-shell"><pre>gem install pritunl_api_client</pre></div>
+
+<h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<div class="highlight highlight-source-ruby"><pre><span class="pl-k">require</span> <span class="pl-s"><span class="pl-pds">'</span>pritunl_api_client<span class="pl-pds">'</span></span>
+
+<span class="pl-smi">@pritunl</span> <span class="pl-k">=</span> <span class="pl-c1">PritunlApiClient</span>::<span class="pl-c1">Client</span>.<span class="pl-k">new</span>(
+  <span class="pl-c1">base_url:</span>   <span class="pl-s"><span class="pl-pds">'</span>https://localhost:9700<span class="pl-pds">'</span></span>,
+  <span class="pl-c1">api_token:</span>  <span class="pl-s"><span class="pl-pds">'</span>p7g444S3IZ5wmFvmzWmx14qACXdzQ25b<span class="pl-pds">'</span></span>,
+  <span class="pl-c1">api_secret:</span> <span class="pl-s"><span class="pl-pds">'</span>OpS9fjxkPI3DclkdKDDr6mqYVd0DJh4i<span class="pl-pds">'</span></span>,
+  <span class="pl-c1">verify_ssl:</span> <span class="pl-c1">false</span>
+)</pre></div>
+
+<h3>
+<a id="returns-a-list-of-organizations-on-the-server-sorted-by-name" class="anchor" href="#returns-a-list-of-organizations-on-the-server-sorted-by-name" aria-hidden="true"><span class="octicon octicon-link"></span></a>Returns a list of organizations on the server sorted by name.</h3>
+
+<div class="highlight highlight-source-ruby"><pre><span class="pl-smi">@pritunl</span>.organization.all
+
+[
+  {
+    <span class="pl-s"><span class="pl-pds">"</span>user_count<span class="pl-pds">"</span></span> =&gt; <span class="pl-c1">512</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>id<span class="pl-pds">"</span></span> =&gt; <span class="pl-s"><span class="pl-pds">"</span>55e99499b0e7300fef77e2b1<span class="pl-pds">"</span></span>,
+    <span class="pl-s"><span class="pl-pds">"</span>name<span class="pl-pds">"</span></span> =&gt; <span class="pl-s"><span class="pl-pds">"</span>org1<span class="pl-pds">"</span></span>
+  },
+  {
+    <span class="pl-s"><span class="pl-pds">"</span>user_count<span class="pl-pds">"</span></span> =&gt; <span class="pl-c1">1024</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>id<span class="pl-pds">"</span></span> =&gt; <span class="pl-s"><span class="pl-pds">"</span>55e9f1d4b0e730245677dc2d<span class="pl-pds">"</span></span>,
+    <span class="pl-s"><span class="pl-pds">"</span>name<span class="pl-pds">"</span></span> =&gt; <span class="pl-s"><span class="pl-pds">"</span>org2<span class="pl-pds">"</span></span>
+  }
+]</pre></div>
+
+<h3>
+<a id="returns-an-organization" class="anchor" href="#returns-an-organization" aria-hidden="true"><span class="octicon octicon-link"></span></a>Returns an organization.</h3>
+
+<div class="highlight highlight-source-ruby"><pre><span class="pl-smi">@pritunl</span>.organization.find( <span class="pl-s"><span class="pl-pds">"</span>55e99499b0e7300fef77e2b1<span class="pl-pds">"</span></span> )
+
+{
+  <span class="pl-s"><span class="pl-pds">"</span>user_count<span class="pl-pds">"</span></span> =&gt; <span class="pl-c1">512</span>,
+  <span class="pl-s"><span class="pl-pds">"</span>id<span class="pl-pds">"</span></span> =&gt; <span class="pl-s"><span class="pl-pds">"</span>55e99499b0e7300fef77e2b1<span class="pl-pds">"</span></span>,
+  <span class="pl-s"><span class="pl-pds">"</span>name<span class="pl-pds">"</span></span> =&gt; <span class="pl-s"><span class="pl-pds">"</span>org1<span class="pl-pds">"</span></span>
+}</pre></div>
+
+<h3>
+<a id="create-a-new-organization" class="anchor" href="#create-a-new-organization" aria-hidden="true"><span class="octicon octicon-link"></span></a>Create a new organization.</h3>
+
+<div class="highlight highlight-source-ruby"><pre><span class="pl-smi">@pritunl</span>.organization.create( <span class="pl-c1">name:</span> <span class="pl-s"><span class="pl-pds">'</span>new_org<span class="pl-pds">'</span></span> )</pre></div>
+
+<h3>
+<a id="rename-an-existing-organization" class="anchor" href="#rename-an-existing-organization" aria-hidden="true"><span class="octicon octicon-link"></span></a>Rename an existing organization.</h3>
+
+<div class="highlight highlight-source-ruby"><pre><span class="pl-smi">@pritunl</span>.organization.update( <span class="pl-s"><span class="pl-pds">'</span>fb48734e859242e2800f077216401736<span class="pl-pds">'</span></span>, <span class="pl-c1">name:</span> <span class="pl-s"><span class="pl-pds">'</span>new_name<span class="pl-pds">'</span></span> )</pre></div>
+
+<h3>
+<a id="delete-an-existing-organization" class="anchor" href="#delete-an-existing-organization" aria-hidden="true"><span class="octicon octicon-link"></span></a>Delete an existing organization.</h3>
+
+<div class="highlight highlight-source-ruby"><pre><span class="pl-smi">@pritunl</span>.organization.delete( <span class="pl-s"><span class="pl-pds">'</span>55e9f27bb0e730245677dc36<span class="pl-pds">'</span></span> )</pre></div>
+
+<h2>
+<a id="contributing" class="anchor" href="#contributing" aria-hidden="true"><span class="octicon octicon-link"></span></a>Contributing</h2>
+
+<p>Bug reports and pull requests are welcome on GitHub at <a href="https://github.com/eterry1388/pritunl_api_client">https://github.com/eterry1388/pritunl_api_client</a>.</p>
+
+<h2>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h2>
+
+<p>The gem is available as open source under the terms of the <a href="http://opensource.org/licenses/MIT">MIT License</a>.</p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/eterry1388/pritunl_api_client">Pritunl API Client</a> is maintained by <a href="https://github.com/eterry1388">eterry1388</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
