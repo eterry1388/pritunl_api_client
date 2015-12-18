@@ -16,10 +16,6 @@ module PritunlApiClient
       @api = Api.new( base_url: base_url, api_token: api_token, api_secret: api_secret, verify_ssl: verify_ssl )
     end
 
-    def auth
-      Auth.new( @api )
-    end
-
     def event
     end
 
