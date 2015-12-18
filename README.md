@@ -4,7 +4,9 @@ API client for Pritunl written in Ruby.
 
 [Pritunl](https://github.com/pritunl/pritunl) is a distributed enterprise
 vpn server built using the OpenVPN protocol. See the official Pritunl API
-documentation here: https://pritunl.com/api.html
+documentation here: https://pritunl.com/api.html.  I am not affiliated with
+Pritunl at all, but couldn't find a Ruby client for their API.  So I scratched
+my own itch and created it myself.
 
 ## Installation
 
