@@ -3,9 +3,8 @@
 API client for Pritunl written in Ruby.
 
 [Pritunl](https://github.com/pritunl/pritunl) is a distributed enterprise
-vpn server built using the OpenVPN protocol.
-
-See Pritunl API documentation here: https://pritunl.com/api.html
+vpn server built using the OpenVPN protocol. See the official Pritunl API
+documentation here: https://pritunl.com/api.html
 
 ## Installation
 
@@ -80,18 +79,18 @@ require 'pritunl_api_client'
 @pritunl.user.find( user['id'], organization_id: org['id'] )
 
 {
-  "auth_type"=>"local",
-  "dns_servers"=>nil,
-  "otp_secret"=>"OPT4HTURJTW6JLQN",
-  "dns_suffix"=>nil,
-  "disabled"=>true,
-  "bypass_secondary"=>false,
-  "id"=>"55e9f98cb0e73033d45b44d7",
-  "name"=>"user0",
-  "organization_name"=>"org1",
-  "organization"=>"55e9f7c7b0e73033d45b44d4",
-  "type"=>"client",
-  "email"=>"user0@pritunl.com"
+  "auth_type" => "local",
+  "dns_servers" => nil,
+  "otp_secret" => "OPT4HTURJTW6JLQN",
+  "dns_suffix" => nil,
+  "disabled" => true,
+  "bypass_secondary" => false,
+  "id" => "55e9f98cb0e73033d45b44d7",
+  "name" => "user0",
+  "organization_name" => "org1",
+  "organization" => "55e9f7c7b0e73033d45b44d4",
+  "type" => "client",
+  "email" => "user0@pritunl.com"
 }
 ```
 
