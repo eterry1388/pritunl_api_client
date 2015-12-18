@@ -6,11 +6,12 @@ module PritunlApiClient
     end
 
     def all
-      @api.get( '/organization' )
+      @api.get( '/settings' )
     end
 
-    def find( organization_id )
-      @api.get( "/organization/#{organization_id}" )
+    def update( params )
+      fail ArgumentError, 'params must be a Hash' unless params.is_a? Hash
+      @api.put( '/settings', params )
     end
 
   end

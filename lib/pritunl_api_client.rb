@@ -16,16 +16,24 @@ module PritunlApiClient
       @api = Api.new( base_url: base_url, api_token: api_token, api_secret: api_secret, verify_ssl: verify_ssl )
     end
 
-    def event
+    def event( cursor: )
+      @api.get( "/event/#{cursor}" )
     end
 
     def ping
+      begin
+        @api.get( '/ping' ) == ''
+      rescue
+        false
+      end
     end
 
     def status
+      @api.get( '/status' )
     end
 
     def log
+      @api.get( '/log' )
     end
 
     def settings

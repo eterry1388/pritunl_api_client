@@ -23,7 +23,9 @@ module PritunlApiClient
       parameters = { params: params }
       parameters.merge!( common_params )
       parameters.merge!( generate_auth_headers( path: path, params: params, method: 'GET' ) )
-      JSON.parse @client[path].get( parameters )
+      result = @client[path].get( parameters )
+      result = JSON.parse( result ) unless result.empty?
+      result
     end
 
     # Update

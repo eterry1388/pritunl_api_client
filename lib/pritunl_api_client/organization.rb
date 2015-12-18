@@ -6,19 +6,21 @@ module PritunlApiClient
     end
 
     def all
-      @api.get( "/organization" )
+      @api.get( '/organization' )
     end
 
     def find( id )
       @api.get( "/organization/#{id}" )
     end
 
-    def create( name: )
-      @api.post( "/organization", name: name )
+    def create( params )
+      fail ArgumentError, 'params must be a Hash' unless params.is_a? Hash
+      @api.post( "/organization", params )
     end
 
-    def update( id, name: )
-      @api.put( "/organization/#{id}", name: name )
+    def update( id, params )
+      fail ArgumentError, 'params must be a Hash' unless params.is_a? Hash
+      @api.put( "/organization/#{id}", params )
     end
 
     def delete( id )

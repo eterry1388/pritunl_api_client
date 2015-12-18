@@ -113,7 +113,7 @@ require 'pritunl_api_client'
 @pritunl.user.update( user['id'],
   organization_id: org['id'],
   name: 'new_name',
-  email: 'new_email@pritunl.com,
+  email: 'new_email@pritunl.com',
   disabled: false
 )
 ```
