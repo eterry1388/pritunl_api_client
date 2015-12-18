@@ -27,17 +27,17 @@ require 'pritunl_api_client'
 )
 ```
 
-### Ping
+## Ping
 
-#### Server healthcheck.
+### Server healthcheck.
 
 ```ruby
 @pritunl.ping
 ```
 
-### Status
+## Status
 
-#### Returns general information about the pritunl server.
+### Returns general information about the pritunl server.
 
 ```ruby
 @pritunl.status
@@ -58,9 +58,9 @@ require 'pritunl_api_client'
 }
 ```
 
-### Log
+## Log
 
-#### Returns a list of server log entries sorted by time.
+### Returns a list of server log entries sorted by time.
 
 ```ruby
 @pritunl.log
@@ -84,9 +84,9 @@ require 'pritunl_api_client'
 ]
 ```
 
-### Events
+## Events
 
-#### Get a list of events (will poll up to 30 seconds)
+### Get a list of events (will poll up to 30 seconds)
 
 ```ruby
 @pritunl.event( cursor: '55e9f1f1b0e730245677dc31' )
