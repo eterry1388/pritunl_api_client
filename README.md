@@ -27,6 +27,137 @@ require 'pritunl_api_client'
 )
 ```
 
+### Ping
+
+#### Server healthcheck.
+
+```ruby
+@pritunl.ping
+```
+
+### Status
+
+#### Returns general information about the pritunl server.
+
+```ruby
+@pritunl.status
+
+{
+  "host_count" => 1,
+  "servers_online" => 1,
+  "hosts_online" => 1,
+  "server_count" => 2,
+  "server_version" => "1.11.813.26",
+  "public_ip" => "10.55.87.4",
+  "user_count" => 1,
+  "notification" => "",
+  "users_online" => 1,
+  "local_networks" => ["10.55.87.3/31", "10.2.214.0/31"],
+  "current_host" => "0f273a6c32ed45259c1ecb1ec3ac05ce",
+  "org_count" => 2
+}
+```
+
+### Log
+
+#### Returns a list of server log entries sorted by time.
+
+```ruby
+@pritunl.log
+
+[
+  {
+    "timestamp" => 1450429682,
+    "message" => "Deleted organization 'org1'.",
+    "id" => "567386a32221390ea53d8047"
+  },
+  {
+    "timestamp" => 1450429682,
+    "message" => "Deleted user 'user1'.",
+    "id" => "567386a32221390ea53d8045"
+  },
+  {
+    "timestamp" => 1450429681,
+    "message" => "Enabled user 'user2'.",
+    "id" => "567386a22221390ea53d8042"
+  }
+]
+```
+
+### Events
+
+#### Get a list of events (will poll up to 30 seconds)
+
+```ruby
+@pritunl.event( cursor: '55e9f1f1b0e730245677dc31' )
+
+[
+  {
+      "id" => "55e9f1f1b0e730245677dc31",
+      "type" => "users_updated",
+      "timestamp" => 1388495793,
+      "resource_id" => "55e9f1f8b0e730245677dc34"
+  },
+  {
+      "id" => "55e9f1f2b0e730245677dc32",
+      "type" => "server_organizations_updated",
+      "timestamp" => 1388495805,
+      "resource_id" => "55e9f1f8b0e730245677dc33"
+  }
+]
+```
+
+## Settings
+
+### Get system settings.
+
+```ruby
+@pritunl.settings.all
+
+{
+  "username" => "user6",
+  "sso_admin" => nil,
+  "theme" => "dark",
+  "sso" => nil,
+  "sso_match" => nil,
+  "server_cert" => "-----BEGIN CERTIFICATE----------END CERTIFICATE-----",
+  "public_address" => "10.5.8.46",
+  "routed_subnet6" => nil,
+  "email_username" => "user1",
+  "sso_saml_issuer_url" => nil,
+  "sso_saml_cert" => nil,
+  "sso_token" => nil,
+  "email_password" => true,
+  "sso_onelogin_key" => nil,
+  "email_server" => "smtp.example.com",
+  "auditing" => nil,
+  "sso_secret" => nil,
+  "server_key" => "-----BEGIN PRIVATE KEY----------END PRIVATE KEY-----",
+  "default" => nil,
+  "sso_host" => nil,
+  "public_address6" => "2605:1480:2:a210::1",
+  "secret" => "9D1ZJTscrr2mK4Xnxw76ltmpwnH7udeO",
+  "sso_okta_token" => nil,
+  "sso_saml_url" => nil,
+  "token" => "UQRM0R3bsXDpy3p6nqtjfrbjujSadaAx",
+  "sso_org" => nil,
+  "email_from" => "first.last@example.com"
+}
+```
+
+### Change the system settings.
+
+```ruby
+@pritunl.settings.update( theme: 'dark' )
+
+@pritunl.settings.update(
+  email_username: 'user1',
+  email_password: '12345',
+  email_server:   'smtp.example.com',
+  email_from:     'first.last@example.com'
+)
+```
+
 ## Users
 
 ### Returns a list of users in an organization sorted by name.
@@ -70,7 +201,7 @@ require 'pritunl_api_client'
     "otp_auth" => false,
     "organization" => "55e9f7c7b0e73033d45b44d4",
     "type" => "client",
-    "email" => "user0@pritunl.com"
+    "email" => "user0@example.com"
   }
 ]
 ```
@@ -92,7 +223,7 @@ require 'pritunl_api_client'
   "organization_name" => "org1",
   "organization" => "55e9f7c7b0e73033d45b44d4",
   "type" => "client",
-  "email" => "user0@pritunl.com"
+  "email" => "user0@example.com"
 }
 ```
 
@@ -102,7 +233,7 @@ require 'pritunl_api_client'
 @pritunl.user.create(
   organization_id: org['id'],
   name: 'new_user',
-  email: 'new_user@pritunl.com',
+  email: 'new_user@example.com',
   disabled: true
 )
 ```
@@ -113,7 +244,7 @@ require 'pritunl_api_client'
 @pritunl.user.update( user['id'],
   organization_id: org['id'],
   name: 'new_name',
-  email: 'new_email@pritunl.com',
+  email: 'new_email@example.com',
   disabled: false
 )
 ```
