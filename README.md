@@ -341,6 +341,176 @@ require 'pritunl_api_client'
 }
 ```
 
+## Servers
+
+### Returns a list of servers.
+
+```ruby
+@pritunl.server.all
+```
+
+### Returns a server.
+
+```ruby
+@pritunl.server.find( server['id'] )
+
+{
+  "status" => "pending",
+  "lzo_compression" => false,
+  "dns_servers" => ["8.8.4.4"],
+  "protocol" => "udp",
+  "ping_interval" => 10,
+  "dns_mapping" => false,
+  "network_mode" => "tunnel",
+  "debug" => false,
+  "network_end" => nil,
+  "bind_address" => nil,
+  "link_ping_interval" => 1,
+  "hash" => "sha1",
+  "ipv6_firewall" => true,
+  "inter_client" => true,
+  "id" => "5678d5286231390ea53eda96",
+  "network_start" => nil,
+  "network" => "10.11.6.0/24",
+  "local_networks" => [],
+  "uptime" => nil,
+  "user_count" => 0,
+  "name" => "server1",
+  "dh_param_bits" => 2048,
+  "max_clients" => 2048,
+  "users_online" => 0,
+  "replica_count" => 1,
+  "link_ping_timeout" => 5,
+  "port" => 12533,
+  "devices_online" => 0,
+  "ping_timeout" => 60,
+  "mode" => "all_traffic",
+  "ipv6" => false,
+  "otp_auth" => false,
+  "jumbo_frames" => false,
+  "multi_device" => false,
+  "search_domain" => "example.com",
+  "cipher" => "aes256"
+}
+```
+
+### Create a new server.
+
+```ruby
+@pritunl.server.create(
+  name: 'server1',
+  network: '10.11.6.0/24',
+  bind_address: nil,
+  port: 12533,
+  protocol: 'udp',
+  dh_param_bits: 2048,
+  mode: 'all_traffic',
+  network_mode: 'tunnel',
+  network_start: nil,
+  network_end: nil,
+  multi_device: false,
+  local_networks: [],
+  dns_servers: ['8.8.4.4'],
+  search_domain: 'pritunl.com',
+  otp_auth: false,
+  cipher: 'aes256',
+  jumbo_frames: false,
+  lzo_compression: false,
+  inter_client: true,
+  ping_interval: 10,
+  ping_timeout: 60,
+  max_clients: 2048,
+  replica_count: 1,
+  debug: false
+)
+```
+
+### Update an existing server.
+
+```ruby
+@pritunl.server.update( server['id'], name: 'server1-rename', dns_servers: ['8.8.8.8', '8.8.4.4'] )
+```
+
+### Delete an existing server.
+
+```ruby
+@pritunl.server.delete( server['id'] )
+```
+
+### Start, stop or restart an existing server.
+
+```ruby
+@pritunl.server.start( server['id'] )
+@pritunl.server.stop( server['id'] )
+@pritunl.server.restart( server['id'] )
+
+```
+
+### Returns a list of organizations attached to a server.
+
+```ruby
+@pritunl.server.organizations( server['id'] )
+
+[
+  {
+    "id" => "5678d0f48831390da53ef8ae",
+    "name" => "org1",
+    "server" => "5678d5286231390ea53eda96"
+  },
+  {
+    "id" => "5678d0f48831392ba71ad3cb",
+    "name" => "org2",
+    "server" => "5678d5286231390ea53eda96"
+  }
+]
+```
+
+### Attach an organization to an existing server.
+
+```ruby
+@pritunl.server.attach_organization( server['id'], organization_id: org['id'] )
+
+{
+  "id" => "5678d0f48831390da53ef8ae",
+  "name" => "org1",
+  "server" => "5678d5286231390ea53eda96"
+}
+
+```
+
+### Remove an organization from an existing server.
+
+```ruby
+@pritunl.server.remove_organization( server['id'], organization_id: org['id'] )
+```
+
+### Get the output of a server.
+
+```ruby
+@pritunl.server.output( server['id'] )
+
+{
+  "id" => "5678d5286231390ea53eda96",
+  "output" => [
+    "[patient-forest-4024] Mon Dec 21 23:45:15 2015 OpenVPN 2.3.2 x86_64-pc-linux-gnu [SSL (OpenSSL)] [LZO] [EPOLL] [PKCS11] [eurephia] [MH] [IPv6] built on Dec  1 2014",
+    "[patient-forest-4024] Mon Dec 21 23:45:15 2015 Control Channel Authentication: tls-auth using INLINE static key file",
+    "[patient-forest-4024] Mon Dec 21 23:45:15 2015 TUN/TAP device tun11 opened",
+    "[patient-forest-4024] Mon Dec 21 23:45:15 2015 do_ifconfig, tt->ipv6=0, tt->did_ifconfig_ipv6_setup=0",
+    "[patient-forest-4024] Mon Dec 21 23:45:15 2015 /sbin/ip link set dev tun11 up mtu 1500",
+    "[patient-forest-4024] Mon Dec 21 23:45:15 2015 /sbin/ip addr add dev tun11 10.11.6.1/24 broadcast 10.11.6.255",
+    "[patient-forest-4024] Mon Dec 21 23:45:15 2015 UDPv4 link local (bound): [undef]",
+    "[patient-forest-4024] Mon Dec 21 23:45:15 2015 UDPv4 link remote: [undef]",
+    "[patient-forest-4024] Mon Dec 21 23:45:15 2015 Initialization Sequence Completed"
+  ]
+}
+```
+
+### Clear the output of a server.
+
+```ruby
+@pritunl.server.clear_output( server['id'] )
+```
+
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/eterry1388/pritunl_api_client.
