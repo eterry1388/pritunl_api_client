@@ -15,7 +15,7 @@ module PritunlApiClient
     # Create
     def post( path, params = {} )
       parameters = common_params.merge( generate_auth_headers( path: path, params: params, method: 'POST' ) )
-      JSON.parse @client[path].post( JSON.generate( params, space: ' ' ), parameters )
+      parse_data @client[path].post( JSON.generate( params, space: ' ' ), parameters )
     end
 
     # Read
@@ -23,15 +23,13 @@ module PritunlApiClient
       parameters = { params: params }
       parameters.merge!( common_params )
       parameters.merge!( generate_auth_headers( path: path, params: params, method: 'GET' ) )
-      result = @client[path].get( parameters )
-      result = JSON.parse( result ) unless result.empty?
-      result
+      parse_data @client[path].get( parameters )
     end
 
     # Update
     def put( path, params = {} )
       parameters = common_params.merge( generate_auth_headers( path: path, params: params, method: 'PUT' ) )
-      JSON.parse @client[path].put( JSON.generate( params, space: ' ' ), parameters )
+      parse_data @client[path].put( JSON.generate( params, space: ' ' ), parameters )
     end
 
     # Delete
@@ -39,13 +37,13 @@ module PritunlApiClient
       parameters = { params: params }
       parameters.merge!( common_params )
       parameters.merge!( generate_auth_headers( path: path, params: params, method: 'DELETE' ) )
-      JSON.parse @client[path].delete( parameters )
+      parse_data @client[path].delete( parameters )
     end
 
     # Metadata Information
     def head( path, params = {} )
       parameters = common_params.merge( generate_auth_headers( path: path, params: params, method: 'HEAD' ) )
-      JSON.parse @client[path].head( JSON.generate( params, space: ' ' ), parameters )
+      parse_data @client[path].head( JSON.generate( params, space: ' ' ), parameters )
     end
 
     private
@@ -69,6 +67,12 @@ module PritunlApiClient
         auth_nonce:     auth_nonce,
         auth_signature: auth_signature
       }
+    end
+
+    def parse_data( data )
+      JSON.parse( data )
+    rescue JSON::ParserError => e
+      data
     end
 
   end

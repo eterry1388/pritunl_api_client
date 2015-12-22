@@ -312,6 +312,35 @@ require 'pritunl_api_client'
 @pritunl.organization.delete( org['id'] )
 ```
 
+## Keys
+
+### Download a users key tar archive.
+
+```ruby
+@pritunl.key.download_tar( organization_id: org['id'], user_id: user['id'], path: 'output.tar' )
+```
+
+### Download a users onc key zip archive.
+
+```ruby
+@pritunl.key.download_zip( organization_id: org['id'], user_id: user['id'], path: 'output.zip' )
+```
+
+### Generate a temporary url to download a users key archive.
+
+```ruby
+@pritunl.key.temporary_url( organization_id: org['id'], user_id: user['id'] )
+
+{
+  "view_url" => "/k/MjyaVvGk",
+  "key_url" => "/key/4f5bd04d85414e20b0a451d642dab06d.tar",
+  "uri_url" => "/ku/MjyaVvGk",
+  "key_zip_url" => "/key/4f5bd04d85414e20b0a451d642dab06d.zip",
+  "key_onc_url" => "/key_onc/4f5bd04d85414e20b0a451d642dab06d.zip",
+  "id" => "4f5bd04d85414e20b0a451d642dab06d"
+}
+```
+
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/eterry1388/pritunl_api_client.
