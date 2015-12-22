@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ['eterry1388@aol.com']
 
   spec.summary       = 'Pritunl Ruby API Client'
-  spec.description   = "API client for Pritunl written in Ruby. Pritunl is a distributed enterprise vpn server built using the OpenVPN protocol. See the official Pritunl API documentation here: https://pritunl.com/api.html. I am not affiliated with Pritunl at all, but couldn't find a Ruby client for their API. So I scratched my own itch and created it myself."
+  spec.description   = "API client for Pritunl written in Ruby. Pritunl is a distributed enterprise vpn server built using the OpenVPN protocol. See the official Pritunl API documentation here: https://pritunl.com/api.html. I am not affiliated with Pritunl."
   spec.homepage      = 'http://eterry1388.github.io/pritunl_api_client'
   spec.license       = 'MIT'
 

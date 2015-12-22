@@ -7,12 +7,11 @@ require_relative 'pritunl_api_client/server'
 
 # API client for Pritunl. Pritunl is a distributed enterprise vpn server built
 # using the OpenVPN protocol. See the official Pritunl API documentation here:
-# https://pritunl.com/api.html. I am not affiliated with Pritunl at all, but
-# couldn't find a Ruby client for their API. So I scratched my own itch and
-# created it myself.
+# https://pritunl.com/api.html. I am not affiliated with Pritunl.
 #
 # @author {mailto:eterry1388@aol.com Eric Terry}
 # @see https://github.com/eterry1388/pritunl_api_client
+# @note Tested with Pritunl server version 1.11.813.26
 module PritunlApiClient
 
   # Main interface to the Pritunl api

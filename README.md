@@ -5,8 +5,7 @@ API client for Pritunl written in Ruby.
 [Pritunl](https://github.com/pritunl/pritunl) is a distributed enterprise
 vpn server built using the OpenVPN protocol. See the official Pritunl API
 documentation here: https://pritunl.com/api.html.  I am not affiliated with
-Pritunl at all, but couldn't find a Ruby client for their API.  So I scratched
-my own itch and created it myself.
+Pritunl.
 
 ## Installation
 
@@ -518,7 +517,7 @@ server up and running when executing the tests.
 ### How to run system tests
 
 ```bash
-  BASE_URL='https://your-ip-address:9700' API_TOKEN='your-api-token' API_SECRET='your-api-secret' rspec
+BASE_URL='https://your-ip-address:9700' API_TOKEN='your-api-token' API_SECRET='your-api-secret' rspec
 ```
 
 The output should look something like this:
