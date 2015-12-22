@@ -511,7 +511,61 @@ require 'pritunl_api_client'
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/eterry1388/pritunl_api_client.
+Bug reports and pull requests are welcome on GitHub at https://github.com/eterry1388/pritunl_api_client.  Please make sure
+all tests pass before making a pull request.  The tests are system tests (not unit tests), so please have a live Pritunl
+server up and running when executing the tests.
+
+### How to run system tests
+
+```bash
+  BASE_URL='https://your-ip-address:9700' API_TOKEN='your-api-token' API_SECRET='your-api-secret' rspec
+```
+
+The output should look something like this:
+
+```
+PritunlApiClient
+  Ping server
+  Get server status
+  Get logs
+  Get events
+  PritunlApiClient::Organization
+    Create organization
+    Find organization
+    Update organization
+    Get all organizations
+    Delete organization
+  PritunlApiClient::User
+    Create user
+    Find user
+    Update user
+    Get all users
+    Generate two-step auth for user
+    Delete user
+  PritunlApiClient::Key
+    Get tar key
+    Get zip key
+    Get key temporary url
+  PritunlApiClient::Server
+    Create server
+    Find server
+    Get all servers
+    Update server
+    Attach organization
+    Get all organizations on server
+    Remove organization
+    Start server
+    Restart server
+    Stop server
+    Get server output
+    Clear server output
+  PritunlApiClient::Settings
+    Get all settings
+    Update settings
+
+Finished in 1 minute 14.14 seconds (files took 0.12978 seconds to load)
+32 examples, 0 failures
+```
 
 ## License
 
