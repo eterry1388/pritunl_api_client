@@ -1,5 +1,7 @@
 # Pritunl API Client
 
+[![Gem Version](https://badge.fury.io/rb/pritunl_api_client.svg)](https://badge.fury.io/rb/pritunl_api_client)
+
 API client for Pritunl written in Ruby.
 
 [Pritunl](https://github.com/pritunl/pritunl) is a distributed enterprise
