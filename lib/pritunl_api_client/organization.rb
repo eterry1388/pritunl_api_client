@@ -15,7 +15,7 @@ module PritunlApiClient
 
     def create( params )
       fail ArgumentError, 'params must be a Hash' unless params.is_a? Hash
-      @api.post( "/organization", params )
+      @api.post( '/organization', params )
     end
 
     def update( id, params )
