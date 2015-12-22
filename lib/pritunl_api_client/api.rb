@@ -13,13 +13,14 @@ module PritunlApiClient
     end
 
     # Create
-    def post( path, params = {} )
-      parameters = common_params.merge( generate_auth_headers( path: path, params: params, method: 'POST' ) )
-      parse_data @client[path].post( JSON.generate( params, space: ' ' ), parameters )
+    def post( path, params = nil )
+      headers = common_params.merge( generate_auth_headers( path: path, params: params, method: 'POST' ) )
+      params = JSON.generate( params, space: ' ' ) if params
+      parse_data @client[path].post( params, headers )
     end
 
     # Read
-    def get( path, params = {} )
+    def get( path, params = nil )
       parameters = { params: params }
       parameters.merge!( common_params )
       parameters.merge!( generate_auth_headers( path: path, params: params, method: 'GET' ) )
@@ -27,13 +28,14 @@ module PritunlApiClient
     end
 
     # Update
-    def put( path, params = {} )
-      parameters = common_params.merge( generate_auth_headers( path: path, params: params, method: 'PUT' ) )
-      parse_data @client[path].put( JSON.generate( params, space: ' ' ), parameters )
+    def put( path, params = nil )
+      headers = common_params.merge( generate_auth_headers( path: path, params: params, method: 'PUT' ) )
+      params = JSON.generate( params, space: ' ' ) if params
+      parse_data @client[path].put( params, headers )
     end
 
     # Delete
-    def delete( path, params = {} )
+    def delete( path, params = nil )
       parameters = { params: params }
       parameters.merge!( common_params )
       parameters.merge!( generate_auth_headers( path: path, params: params, method: 'DELETE' ) )
@@ -41,9 +43,10 @@ module PritunlApiClient
     end
 
     # Metadata Information
-    def head( path, params = {} )
-      parameters = common_params.merge( generate_auth_headers( path: path, params: params, method: 'HEAD' ) )
-      parse_data @client[path].head( JSON.generate( params, space: ' ' ), parameters )
+    def head( path, params = nil )
+      headers = common_params.merge( generate_auth_headers( path: path, params: params, method: 'HEAD' ) )
+      params = JSON.generate( params, space: ' ' ) if params
+      parse_data @client[path].head( params, headers )
     end
 
     private
@@ -52,11 +55,11 @@ module PritunlApiClient
       { content_type: :json, accept: :json }
     end
 
-    def generate_auth_headers( path:, params: {}, method: )
+    def generate_auth_headers( path:, params: nil, method: )
       auth_timestamp = Time.now.to_i
       auth_nonce = SecureRandom.hex( 16 )
       auth_string = [@api_token, auth_timestamp, auth_nonce, method, path]
-      auth_string << JSON.generate( params, space: ' ' ) unless params.empty?
+      auth_string << JSON.generate( params, space: ' ' ) if params
       auth_string = auth_string.join( '&' )
       digest = OpenSSL::Digest.new( 'sha256' )
       hmac = OpenSSL::HMAC.digest( digest, @api_secret, auth_string )

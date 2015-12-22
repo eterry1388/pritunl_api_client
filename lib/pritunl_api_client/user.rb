@@ -31,8 +31,6 @@ module PritunlApiClient
       @api.delete( "/user/#{organization_id}/#{id}" )
     end
 
-    # @note Currently not working
-    # @see https://github.com/pritunl/pritunl/issues/212
     def otp_secret( id, organization_id: )
       @api.put( "/user/#{organization_id}/#{id}/otp_secret" )
     end
