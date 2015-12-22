@@ -443,7 +443,6 @@ require 'pritunl_api_client'
 @pritunl.server.start( server['id'] )
 @pritunl.server.stop( server['id'] )
 @pritunl.server.restart( server['id'] )
-
 ```
 
 ### Returns a list of organizations attached to a server.
@@ -475,7 +474,6 @@ require 'pritunl_api_client'
   "name" => "org1",
   "server" => "5678d5286231390ea53eda96"
 }
-
 ```
 
 ### Remove an organization from an existing server.
