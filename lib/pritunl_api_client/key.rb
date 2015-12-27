@@ -16,7 +16,7 @@ module PritunlApiClient
     # @return [String] Local path to downloaded file
     def download_tar( organization_id:, user_id:, path: )
       data = @api.get( "/key/#{organization_id}/#{user_id}.tar" )
-      File.write( path, data )
+      File.write( path, data.force_encoding( 'utf-8' ) )
       path
     end
 
@@ -28,7 +28,7 @@ module PritunlApiClient
     # @return [String] Local path to downloaded file
     def download_zip( organization_id:, user_id:, path: )
       data = @api.get( "/key/#{organization_id}/#{user_id}.zip" )
-      File.write( path, data )
+      File.write( path, data.force_encoding( 'utf-8' ) )
       path
     end
 
@@ -40,7 +40,7 @@ module PritunlApiClient
     # @return [String] Local path to downloaded file
     def download_chromebook_profile( organization_id:, user_id:, path: )
       data = @api.get( "/key_onc/#{organization_id}/#{user_id}.zip" )
-      File.write( path, data )
+      File.write( path, data.force_encoding( 'utf-8' ) )
       path
     end
 
