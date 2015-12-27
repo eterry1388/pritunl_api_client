@@ -169,6 +169,14 @@ describe PritunlApiClient do
       end
     end
 
+    it 'Get chromebook profile onc zip key' do
+      begin
+        expect { @pritunl.key.download_chromebook_profile( organization_id: @org['id'], user_id: @user['id'], path: 'output.zip' ) }.to_not raise_error
+      ensure
+        File.delete( 'output.zip' )
+      end
+    end
+
     it 'Get key temporary url' do
       expect { @pritunl.key.temporary_url( organization_id: @org['id'], user_id: @user['id'] ) }.to_not raise_error
     end

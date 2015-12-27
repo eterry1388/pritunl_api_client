@@ -20,13 +20,25 @@ module PritunlApiClient
       path
     end
 
-    # Download a users onc key zip archive
+    # Download a users key zip archive
     #
     # @param organization_id [String]
     # @param user_id [String]
     # @param path [String] Local path to save downloaded file
     # @return [String] Local path to downloaded file
     def download_zip( organization_id:, user_id:, path: )
+      data = @api.get( "/key/#{organization_id}/#{user_id}.zip" )
+      File.write( path, data )
+      path
+    end
+
+    # Download a users onc key (Chromebook profile) as a zip archive
+    #
+    # @param organization_id [String]
+    # @param user_id [String]
+    # @param path [String] Local path to save downloaded file
+    # @return [String] Local path to downloaded file
+    def download_chromebook_profile( organization_id:, user_id:, path: )
       data = @api.get( "/key_onc/#{organization_id}/#{user_id}.zip" )
       File.write( path, data )
       path
