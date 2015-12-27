@@ -321,10 +321,16 @@ require 'pritunl_api_client'
 @pritunl.key.download_tar( organization_id: org['id'], user_id: user['id'], path: 'output.tar' )
 ```
 
-### Download a users onc key zip archive.
+### Download a users key zip archive.
 
 ```ruby
 @pritunl.key.download_zip( organization_id: org['id'], user_id: user['id'], path: 'output.zip' )
+```
+
+### Download a users onc key Chromebook profile zip archive.
+
+```ruby
+@pritunl.key.download_chromebook_profile( organization_id: org['id'], user_id: user['id'], path: 'output.zip' )
 ```
 
 ### Generate a temporary url to download a users key archive.
