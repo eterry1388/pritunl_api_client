@@ -1,6 +1,9 @@
 # Pritunl API Client
 
 [![Gem Version](https://badge.fury.io/rb/pritunl_api_client.svg)](https://badge.fury.io/rb/pritunl_api_client)
+![](http://ruby-gem-downloads-badge.herokuapp.com/pritunl_api_client?type=total)
+[![Inline docs](http://inch-ci.org/github/eterry1388/pritunl_api_client.svg?branch=master)](http://inch-ci.org/github/eterry1388/pritunl_api_client)
+[![Dependency Status](https://gemnasium.com/eterry1388/pritunl_api_client.svg)](https://gemnasium.com/eterry1388/pritunl_api_client)
 
 API client for Pritunl written in Ruby.
 
