@@ -22,7 +22,10 @@
       <h1>
 <a id="pritunl-api-client" class="anchor" href="#pritunl-api-client" aria-hidden="true"><span class="octicon octicon-link"></span></a>Pritunl API Client</h1>
 
-<p><a href="https://badge.fury.io/rb/pritunl_api_client"><img src="https://badge.fury.io/rb/pritunl_api_client.svg" alt="Gem Version"></a></p>
+<p><a href="https://badge.fury.io/rb/pritunl_api_client"><img src="https://badge.fury.io/rb/pritunl_api_client.svg" alt="Gem Version"></a>
+<img src="http://ruby-gem-downloads-badge.herokuapp.com/pritunl_api_client?type=total" alt="">
+<a href="http://inch-ci.org/github/eterry1388/pritunl_api_client"><img src="http://inch-ci.org/github/eterry1388/pritunl_api_client.svg?branch=master" alt="Inline docs"></a>
+<a href="https://gemnasium.com/eterry1388/pritunl_api_client"><img src="https://gemnasium.com/eterry1388/pritunl_api_client.svg" alt="Dependency Status"></a></p>
 
 <p>API client for Pritunl written in Ruby.</p>
 
@@ -332,9 +335,14 @@ Pritunl.</p>
 <div class="highlight highlight-source-ruby"><pre><span class="pl-smi">@pritunl</span>.key.download_tar( <span class="pl-c1">organization_id:</span> org[<span class="pl-s"><span class="pl-pds">'</span>id<span class="pl-pds">'</span></span>], <span class="pl-c1">user_id:</span> user[<span class="pl-s"><span class="pl-pds">'</span>id<span class="pl-pds">'</span></span>], <span class="pl-c1">path:</span> <span class="pl-s"><span class="pl-pds">'</span>output.tar<span class="pl-pds">'</span></span> )</pre></div>
 
 <h3>
-<a id="download-a-users-onc-key-zip-archive" class="anchor" href="#download-a-users-onc-key-zip-archive" aria-hidden="true"><span class="octicon octicon-link"></span></a>Download a users onc key zip archive.</h3>
+<a id="download-a-users-key-zip-archive" class="anchor" href="#download-a-users-key-zip-archive" aria-hidden="true"><span class="octicon octicon-link"></span></a>Download a users key zip archive.</h3>
 
 <div class="highlight highlight-source-ruby"><pre><span class="pl-smi">@pritunl</span>.key.download_zip( <span class="pl-c1">organization_id:</span> org[<span class="pl-s"><span class="pl-pds">'</span>id<span class="pl-pds">'</span></span>], <span class="pl-c1">user_id:</span> user[<span class="pl-s"><span class="pl-pds">'</span>id<span class="pl-pds">'</span></span>], <span class="pl-c1">path:</span> <span class="pl-s"><span class="pl-pds">'</span>output.zip<span class="pl-pds">'</span></span> )</pre></div>
+
+<h3>
+<a id="download-a-users-onc-key-chromebook-profile-zip-archive" class="anchor" href="#download-a-users-onc-key-chromebook-profile-zip-archive" aria-hidden="true"><span class="octicon octicon-link"></span></a>Download a users onc key Chromebook profile zip archive.</h3>
+
+<div class="highlight highlight-source-ruby"><pre><span class="pl-smi">@pritunl</span>.key.download_chromebook_profile( <span class="pl-c1">organization_id:</span> org[<span class="pl-s"><span class="pl-pds">'</span>id<span class="pl-pds">'</span></span>], <span class="pl-c1">user_id:</span> user[<span class="pl-s"><span class="pl-pds">'</span>id<span class="pl-pds">'</span></span>], <span class="pl-c1">path:</span> <span class="pl-s"><span class="pl-pds">'</span>output.zip<span class="pl-pds">'</span></span> )</pre></div>
 
 <h3>
 <a id="generate-a-temporary-url-to-download-a-users-key-archive" class="anchor" href="#generate-a-temporary-url-to-download-a-users-key-archive" aria-hidden="true"><span class="octicon octicon-link"></span></a>Generate a temporary url to download a users key archive.</h3>
