@@ -153,28 +153,67 @@ describe PritunlApiClient do
       @pritunl.organization.delete( @org['id'] ) if @org
     end
 
-    it 'Get tar key' do
+    it 'Download key' do
+      begin
+        server = create_server
+        wait_until_server_is_fully_created( server['id'] )
+        @pritunl.server.attach_organization( server['id'], organization_id: @org['id'] )
+        @pritunl.server.start( server['id'] )
+        @pritunl.user.update( @user['id'], organization_id: @org['id'], disabled: false )
+        expect { @pritunl.key.download( organization_id: @org['id'], user_id: @user['id'], path: 'output.ovpn' ) }.to_not raise_error
+      ensure
+        File.delete( 'output.ovpn' ) if File.file? 'output.ovpn'
+        @pritunl.server.delete( server['id'] ) if server
+      end
+    end
+
+    it 'Get key' do
+      begin
+        server = create_server
+        wait_until_server_is_fully_created( server['id'] )
+        @pritunl.server.attach_organization( server['id'], organization_id: @org['id'] )
+        @pritunl.server.start( server['id'] )
+        @pritunl.user.update( @user['id'], organization_id: @org['id'], disabled: false )
+        expect { @pritunl.key.download( organization_id: @org['id'], user_id: @user['id'] ) }.to_not raise_error
+      ensure
+        @pritunl.server.delete( server['id'] ) if server
+      end
+    end
+
+    it 'Download tar key' do
       begin
         expect { @pritunl.key.download_tar( organization_id: @org['id'], user_id: @user['id'], path: 'output.tar' ) }.to_not raise_error
       ensure
-        File.delete( 'output.tar' )
+        File.delete( 'output.tar' ) if File.file? 'output.tar'
+      end
+    end
+
+    it 'Get tar key' do
+      expect { @pritunl.key.download_tar( organization_id: @org['id'], user_id: @user['id'] ) }.to_not raise_error
+    end
+
+    it 'Download zip key' do
+      begin
+        expect { @pritunl.key.download_zip( organization_id: @org['id'], user_id: @user['id'], path: 'output.zip' ) }.to_not raise_error
+      ensure
+        File.delete( 'output.zip' ) if File.file? 'output.zip'
       end
     end
 
     it 'Get zip key' do
+      expect { @pritunl.key.download_zip( organization_id: @org['id'], user_id: @user['id'] ) }.to_not raise_error
+    end
+
+    it 'Download chromebook profile onc zip key' do
       begin
-        expect { @pritunl.key.download_zip( organization_id: @org['id'], user_id: @user['id'], path: 'output.zip' ) }.to_not raise_error
+        expect { @pritunl.key.download_chromebook_profile( organization_id: @org['id'], user_id: @user['id'], path: 'output.zip' ) }.to_not raise_error
       ensure
-        File.delete( 'output.zip' )
+        File.delete( 'output.zip' ) if File.file? 'output.zip'
       end
     end
 
     it 'Get chromebook profile onc zip key' do
-      begin
-        expect { @pritunl.key.download_chromebook_profile( organization_id: @org['id'], user_id: @user['id'], path: 'output.zip' ) }.to_not raise_error
-      ensure
-        File.delete( 'output.zip' )
-      end
+      expect { @pritunl.key.download_chromebook_profile( organization_id: @org['id'], user_id: @user['id'] ) }.to_not raise_error
     end
 
     it 'Get key temporary url' do
@@ -371,7 +410,7 @@ def create_server
 end
 
 def wait_until_server_is_fully_created( server_id )
-  Timeout::timeout( 30 ) do
+  Timeout::timeout( 90 ) do
     loop do
       result = @pritunl.server.find( server_id )
       break if result['status'] != 'pending'

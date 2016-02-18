@@ -318,6 +318,15 @@ require 'pritunl_api_client'
 
 ## Keys
 
+If you omit the `path` parameter on any of the `key` APIs below, the file content will be directly returned
+from the method rather than to a downloaded file.
+
+### Download a users key.
+
+```ruby
+@pritunl.key.download( organization_id: org['id'], user_id: user['id'], path: 'output.ovpn' )
+```
+
 ### Download a users key tar archive.
 
 ```ruby
@@ -553,8 +562,14 @@ PritunlApiClient
     Generate two-step auth for user
     Delete user
   PritunlApiClient::Key
+    Download key
+    Get key
+    Download tar key
     Get tar key
+    Download zip key
     Get zip key
+    Download chromebook profile onc zip key
+    Get chromebook profile onc zip key
     Get key temporary url
   PritunlApiClient::Server
     Create server
@@ -573,8 +588,8 @@ PritunlApiClient
     Get all settings
     Update settings
 
-Finished in 1 minute 14.14 seconds (files took 0.12978 seconds to load)
-32 examples, 0 failures
+Finished in 1 minute 11.62 seconds (files took 0.17043 seconds to load)
+38 examples, 0 failures
 ```
 
 ## License
