@@ -10,7 +10,8 @@ module PritunlApiClient
 
     # Download a users key
     #
-    # @note User organization must be attached to a server
+    # @note User organization must be attached to a server AND user must be enabled and NOT connected!
+    # @deprecated This method of downloading the OVPN file is not reliable. Use {#download_tar} or {#download_zip} instead.
     # @param organization_id [String]
     # @param user_id [String]
     # @param path [String] Local path to save downloaded file (if omitted, file content fill be returned)
@@ -69,7 +70,7 @@ module PritunlApiClient
       path
     end
 
-    # Generate a temporary url to download a users key archive 
+    # Generate a temporary url to download a users key archive
     #
     # @param organization_id [String]
     # @param user_id [String]

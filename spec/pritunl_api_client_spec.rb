@@ -410,7 +410,7 @@ def create_server
 end
 
 def wait_until_server_is_fully_created( server_id )
-  Timeout::timeout( 90 ) do
+  Timeout::timeout( 180 ) do
     loop do
       result = @pritunl.server.find( server_id )
       break if result['status'] != 'pending'

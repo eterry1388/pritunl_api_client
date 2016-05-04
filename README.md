@@ -3,7 +3,6 @@
 [![Gem Version](https://badge.fury.io/rb/pritunl_api_client.svg)](https://badge.fury.io/rb/pritunl_api_client)
 ![](http://ruby-gem-downloads-badge.herokuapp.com/pritunl_api_client?type=total)
 [![Inline docs](http://inch-ci.org/github/eterry1388/pritunl_api_client.svg?branch=master)](http://inch-ci.org/github/eterry1388/pritunl_api_client)
-[![Dependency Status](https://gemnasium.com/eterry1388/pritunl_api_client.svg)](https://gemnasium.com/eterry1388/pritunl_api_client)
 
 API client for Pritunl written in Ruby.
 
@@ -24,7 +23,7 @@ gem install pritunl_api_client
 require 'pritunl_api_client'
 
 @pritunl = PritunlApiClient::Client.new(
-  base_url:   'https://localhost:9700',
+  base_url:   'https://localhost',
   api_token:  'p7g444S3IZ5wmFvmzWmx14qACXdzQ25b',
   api_secret: 'OpS9fjxkPI3DclkdKDDr6mqYVd0DJh4i',
   verify_ssl: false
@@ -323,6 +322,10 @@ from the method rather than to a downloaded file.
 
 ### Download a users key.
 
+**Deprecated:** This method of downloading the OVPN file is not reliable. Use `#download_tar` or `#download_zip` instead.
+
+User organization must be attached to a server AND user must be enabled and NOT connected!
+
 ```ruby
 @pritunl.key.download( organization_id: org['id'], user_id: user['id'], path: 'output.ovpn' )
 ```
@@ -537,7 +540,7 @@ server up and running when executing the tests.
 ### How to run system tests
 
 ```bash
-BASE_URL='https://your-ip-address:9700' API_TOKEN='your-api-token' API_SECRET='your-api-secret' rspec
+BASE_URL='https://your-ip-address' API_TOKEN='your-api-token' API_SECRET='your-api-secret' rspec
 ```
 
 The output should look something like this:
